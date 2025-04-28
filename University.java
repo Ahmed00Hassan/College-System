@@ -299,9 +299,11 @@ public class University {
     }
     public boolean is_normal_student(int studentId){
     Nodestudent currentstudent=students.searchStudent(studentId);
-        if (currentstudent.enrolledCouresCount<2||currentstudent.enrolledCouresCount>7) {
+        if (currentstudent.enrolledCouresCount<2||currentstudent.enrolledCouresCount>=7) {
+            System.out.println("The student reached the maximum enroll");
             return false;
         }else{
+            System.out.println("The student "+studentId+" not reaced the maximum enroll");
         return true;
         }
     
