@@ -15,20 +15,30 @@ public class University {
     private Stack<EnrollmentAction> redoStack = new Stack<>();
     
     // The University constructor holds references to StudentList/CourseList objects
-    //when create object we can access all methods in student/course class
+    // when create object we can access all methods in student/course class
     public University(){
         ///create object from studentlist/courselist class
         this.students =new StudentList();
         this.courses =new CourseList();
     }
     public void addstudent(int id){
-        students.addstudent(id);
+        Nodestudent student =students.searchStudent(id);
+        if (student !=null) {
+            System.out.println("the student "+id+" has already been added!");
+        }
+        else        students.addstudent(id);        
+ 
     }
+    
     public void removestudent(int id){
         students.removestudent(id);
     }
     public void addcourse(int id){
-        courses.addcourse(id);
+         Nodecourse course = courses.searchCourse(id);
+        if (course !=null) {
+            System.out.println("the course "+id+" has already been added!");
+        }
+        else        courses.addcourse(id);
     }
     public void removecourse(int id){
         courses.removecourse(id);
@@ -55,6 +65,15 @@ public class University {
         if (course.studentCount >=30) {
             System.out.println("Course "+courseId+" is full");
             return;
+        }
+        // Check for existing enrollment
+        Nodecourse check = student.enrolledCourse;
+        while (check != null) {
+            if (check.courseId == courseId) {
+                System.out.println("Student " + studentId + " is already enrolled in course " + courseId);
+                return;
+            }
+            check = check.next;
         }
         
         //add course to student's list
