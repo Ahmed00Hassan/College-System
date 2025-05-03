@@ -26,22 +26,30 @@ public class University {
         if (student !=null) {
             System.out.println("the student "+id+" has already been added!");
         }
-        else        students.addstudent(id);        
- 
+        else{
+            students.addstudent(id);
+            System.out.println("added successfully\n");       
+        }
     }
     
     public void removestudent(int id){
         students.removestudent(id);
+        System.out.println("removed successfully\n");  
     }
     public void addcourse(int id){
          Nodecourse course = courses.searchCourse(id);
         if (course !=null) {
             System.out.println("the course "+id+" has already been added!");
         }
-        else        courses.addcourse(id);
+        else{
+            courses.addcourse(id);
+            System.out.println("added successfully\n");
+        }
     }
     public void removecourse(int id){
         courses.removecourse(id);
+        System.out.println("removed successfully\n");
+        
     }
     public void laststudent(){
         System.out.println("The last student added: "+students.laststudent());
@@ -307,19 +315,22 @@ public class University {
         
     public boolean is_full_course(int courseId){
     Nodecourse currentcourse=courses.searchCourse(courseId);
-        if (currentcourse.studentCount>30){
+        if (currentcourse.studentCount>+30){
             System.out.println("This course is full");
             return true;
         } else{
             System.out.println("This course has "+(30-currentcourse.studentCount)+" free sets");
-        return false;
+            return false;
         }
       
     }
     public boolean is_normal_student(int studentId){
     Nodestudent currentstudent=students.searchStudent(studentId);
-        if (currentstudent.enrolledCouresCount<2||currentstudent.enrolledCouresCount>=7) {
+        if (currentstudent.enrolledCouresCount>=7) {
             System.out.println("The student reached the maximum enroll");
+            return false;
+        }else if (currentstudent.enrolledCouresCount<2) {
+            System.out.println("The student enroled less than 2 courses");
             return false;
         }else{
             System.out.println("The student "+studentId+" not reaced the maximum enroll");
